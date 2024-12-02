@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Scatterplot Viewer</h1>
+    <label for="x-select">X Variable:</label>
+    <select id="x-select"></select>
+
+    <label for="y-select">Y Variable:</label>
+    <select id="y-select"></select>
+
+    <button onclick="updatePlot()">Update Plot</button>
+    <canvas id="scatterPlot"></canvas>
+
+    <!-- Add navigation button -->
+    <button onclick="location.href='/regression'">Go to Regression Page</button>
+
+    <script src="/static/js/scatter.js"></script>
+</body>
+</html>

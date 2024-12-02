@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <h1>Run Regression</h1>
+    <div id="features"></div>
+    <label for="target">Target Variable:</label>
+    <select id="target"></select>
+    <button onclick="runRegression()">Run Regression</button>
+
+    <!-- Display results: metrics, equation, and cost graph -->
+    <div id="results"></div>
+
+    <h3>Cost Graph</h3>
+    <canvas id="costGraph"></canvas>
+
+    <!-- Back to Index Button -->
+    <button onclick="location.href='/'">Back to Scatter Plot</button>
+
+    <script src="/static/js/regression.js"></script>
+</body>
+</html>
