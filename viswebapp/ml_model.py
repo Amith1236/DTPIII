@@ -365,12 +365,12 @@ print("Learned Beta Coefficients:")
 print(beta)
 
 # Plot the cost function over iterations
-plt.figure(figsize=(10, 6))
-plt.plot(J_storage, color='blue', linewidth=2)
-plt.title("Cost Function (J) Over Iterations", fontsize=14)
-plt.xlabel("Iterations", fontsize=12)
-plt.ylabel("Cost (J)", fontsize=12)
-plt.grid(True)
+# plt.figure(figsize=(10, 6))
+# plt.plot(J_storage, color='blue', linewidth=2)
+# plt.title("Cost Function (J) Over Iterations", fontsize=14)
+# plt.xlabel("Iterations", fontsize=12)
+# plt.ylabel("Cost (J)", fontsize=12)
+# plt.grid(True)
 #plt.show()
 
 # Get predictions for the test set
@@ -392,25 +392,25 @@ df_features = pd.DataFrame(df_feature_test, columns=feature_columns)
 # plt.show()
 
 # Residual Plot: Residuals vs Predicted
-plt.figure(figsize=(10, 6))
-sns.scatterplot(x=df_predictions["Predicted"], y=df_predictions["Residuals"], color='purple')
-plt.axhline(0, color='red', linestyle='--', linewidth=1)
-plt.title("Residuals vs Predicted", fontsize=14)
-plt.xlabel("Predicted", fontsize=12)
-plt.ylabel("Residuals", fontsize=12)
-plt.grid(True)
+# plt.figure(figsize=(10, 6))
+# sns.scatterplot(x=df_predictions["Predicted"], y=df_predictions["Residuals"], color='purple')
+# plt.axhline(0, color='red', linestyle='--', linewidth=1)
+# plt.title("Residuals vs Predicted", fontsize=14)
+# plt.xlabel("Predicted", fontsize=12)
+# plt.ylabel("Residuals", fontsize=12)
+# plt.grid(True)
 #plt.show()
 
 # Prediction vs Actual Plot
-plt.figure(figsize=(10, 6))
-plt.scatter(df_predictions["Actual"], df_predictions["Predicted"], alpha=0.7, color='blue')
-plt.plot([df_predictions["Actual"].min(), df_predictions["Actual"].max()],
-         [df_predictions["Actual"].min(), df_predictions["Actual"].max()],
-         color='red', linestyle='--', linewidth=2)
-plt.title("Predicted vs Actual Values", fontsize=14)
-plt.xlabel("Actual", fontsize=12)
-plt.ylabel("Predicted", fontsize=12)
-plt.grid(True)
+# plt.figure(figsize=(10, 6))
+# plt.scatter(df_predictions["Actual"], df_predictions["Predicted"], alpha=0.7, color='blue')
+# plt.plot([df_predictions["Actual"].min(), df_predictions["Actual"].max()],
+#          [df_predictions["Actual"].min(), df_predictions["Actual"].max()],
+#          color='red', linestyle='--', linewidth=2)
+# plt.title("Predicted vs Actual Values", fontsize=14)
+# plt.xlabel("Actual", fontsize=12)
+# plt.ylabel("Predicted", fontsize=12)
+# plt.grid(True)
 #plt.show()
 
 # put Python code to test & evaluate the model
@@ -533,8 +533,11 @@ def run_regression(selected_features, target_variable):
 
     # Equation
     equation = "y = "
-    equation += " + ".join([f"{beta[i][0]:.4f} * {selected_features[i]}" for i in range(len(selected_features))])
-    equation += f" + {beta[-1][0]:.4f}"  # Add the intercept
+    # Add the intercept
+    equation += f"{beta[0][0]:.4f}"
+    if len(selected_features) > 0:
+        equation += " + " + " + ".join([f"{beta[i+1][0]:.4f} * {selected_features[i]}" for i in range(len(selected_features))])
+      
 
     # Plot cost graph
     cost_graph = base64.b64encode(plot_cost_graph(J_storage)).decode("utf-8")
