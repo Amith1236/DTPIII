@@ -242,19 +242,33 @@ def run_regression(selected_features, target_variable):
     if len(selected_features) > 0:
         equation += " + " + " + ".join([f"{beta[i+1][0]:.4f} * {selected_features[i]}" for i in range(len(selected_features))])
       
+    # Get predictions for the test set
+    y_hat_test = predict_linreg(df_feature_test.to_numpy(), beta, means, stds)
 
+    # Convert arrays to DataFrame for easier plotting
+    df_predictions = pd.DataFrame({
+        "Actual": df_target_test.squeeze(),
+        "Predicted": y_hat_test.squeeze(),
+        "Residuals": df_target_test.squeeze() - y_hat_test.squeeze()
+    })
+    
     # Plot cost graph
-    cost_graph = base64.b64encode(plot_cost_graph(J_storage)).decode("utf-8")
+    vs_graph = base64.b64encode(plot_pred_vs_actual_graph(df_predictions)).decode("utf-8")
 
-    return metrics, equation, cost_graph, beta.tolist(), means.tolist(), stds.tolist()
+    return metrics, equation, vs_graph, beta.tolist(), means.tolist(), stds.tolist()
 
-def plot_cost_graph(J_storage):
-    fig, ax = plt.subplots()
-    ax.plot(J_storage)
-    ax.set_title("Cost Over Iterations")
-    ax.set_xlabel("Iterations")
-    ax.set_ylabel("Cost")
+
+def plot_pred_vs_actual_graph(df_predictions):
+    # Prediction vs Actual Plot
     img = BytesIO()
+    plt.figure(figsize=(10, 6))
+    plt.scatter(df_predictions["Actual"], df_predictions["Predicted"], alpha=0.7, color='blue')
+    plt.plot([df_predictions["Actual"].min(), df_predictions["Actual"].max()],
+            [df_predictions["Actual"].min(), df_predictions["Actual"].max()],
+            color='red', linestyle='--', linewidth=2)
+    plt.title("Predicted vs Actual Values", fontsize=14)
+    plt.xlabel("Actual", fontsize=12)
+    plt.ylabel("Predicted", fontsize=12)
     plt.savefig(img, format='png')
     img.seek(0)
     return img.read()

@@ -50,7 +50,7 @@ async function runRegression() {
         body: JSON.stringify({ features: selectedFeatures, target })
     });
 
-    const { metrics, equation, cost_graph, betas , means, stds} = await response.json();
+    const { metrics, equation, vs_graph, betas , means, stds} = await response.json();
     regressionBetas = betas; // Store the regression coefficients for prediction
     calculatedMeans = means;
     calculatedStds = stds;
@@ -66,7 +66,7 @@ async function runRegression() {
         <p><strong>MSE:</strong> ${metrics.MSE}</p>
         <p><strong>MAE:</strong> ${metrics.MAE}</p>
         <p><strong>Equation:</strong> ${equation}</p>
-        <img src="data:image/png;base64,${cost_graph}" alt="Cost Graph">
+        <img src="data:image/png;base64,${vs_graph}" alt="Prediction vs Actual Graph">
     `;
 
     // Dynamically create input fields for each selected feature

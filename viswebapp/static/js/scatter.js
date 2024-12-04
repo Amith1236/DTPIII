@@ -41,7 +41,7 @@ async function updatePlot() {
 
     // Update the image source dynamically
     const plotImage = document.getElementById("scatterPlotImage");
-    plotImage.src = data.plot_url; // Assuming the backend returns a URL or base64 data for the image
+    plotImage.src = data.plot_url; 
 
     // Show the plot container once the image is ready
     const scatterPlotContainer = document.getElementById("scatterPlotContainer");

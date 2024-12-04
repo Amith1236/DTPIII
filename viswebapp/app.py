@@ -32,10 +32,10 @@ def run_regression_route():
     # Run regression based on selected features and target
     selected_features = request.json["features"]
     target_variable = request.json["target"]
-    metrics, equation, cost_graph, beta , mean, std= run_regression(selected_features, target_variable)
+    metrics, equation, vs_graph, beta , mean, std= run_regression(selected_features, target_variable)
     return jsonify({"metrics": metrics, 
                     "equation": equation, 
-                    "cost_graph": cost_graph, 
+                    "vs_graph": vs_graph, 
                     "betas": beta, 
                     "means": mean, 
                     "stds": std})
