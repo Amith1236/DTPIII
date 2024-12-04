@@ -246,7 +246,7 @@ def run_regression(selected_features, target_variable):
     # Plot cost graph
     cost_graph = base64.b64encode(plot_cost_graph(J_storage)).decode("utf-8")
 
-    return metrics, equation, cost_graph
+    return metrics, equation, cost_graph, beta.tolist(), means.tolist(), stds.tolist()
 
 def plot_cost_graph(J_storage):
     fig, ax = plt.subplots()

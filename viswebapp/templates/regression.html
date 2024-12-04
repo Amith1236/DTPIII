@@ -34,7 +34,21 @@
         </div>
 
         <!-- Display Results -->
-        <div id="results" class="mb-4">
+        <div id="results" class="mb-4"></div>
+
+        <!-- Dynamic Input Fields for Features -->
+        <div id="dynamicInputs" class="mb-4">
+            <!-- Inputs for each feature will appear here -->
+        </div>
+
+        <!-- Predict Button -->
+        <div class="text-center mb-4">
+            <button onclick="predictOutput()" class="btn btn-success">Predict Output</button>
+        </div>
+
+        <!-- Predicted Output -->
+        <div id="predictedOutput" class="text-center">
+            <p><strong>Predicted Output:</strong> <span id="predictionResult"></span></p>
         </div>
 
         <!-- Back to Scatterplot Page -->
