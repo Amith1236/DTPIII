@@ -1,54 +1,102 @@
 import pandas as pd
 
 ######Import data#########
-###Testing Data with Outbound and Inbound against FBSI
-#Outbound Departures
-df1 = pd.read_csv("datasets\OutboundDeparturesOfSingaporeResidentsByModeOfTransportMonthly.csv")
-'''
-Independent Variable: Total outbound departures of Singaporean residents
-Column Title: Total -> Rename to TotalOutbound
+###Importing datasets
 
-This data shows how many residents are traveling out of Singapore each month.
+###Independent Variables
+#Outbound Departures
 '''
+Independent Variable: Total outbound departures of Singapore residents.
+Column Title: Total (Rename to TotalOutbound)
+Description: This dataset tracks how many residents are traveling out of Singapore each month.
+Potential Impact: Could indicate reduced local food service usage due to residents traveling abroad.
+Source:https://tablebuilder.singstat.gov.sg/table/TS/M650661
+data.gov dataset ID: d_a9109fbbdcc9e874fcce773060183cff
+'''
+df1 = pd.read_csv("datasets\OutboundDeparturesOfSingaporeResidentsByModeOfTransportMonthly.csv")
 
 #Inbound Tourism Markets
+'''
+Independent Variable: Total international visitor arrivals.
+Column Title: Total International Visitor Arrivals By Inbound Tourism Markets (Rename to TotalInbound)
+Description: Tracks monthly international visitor arrivals to Singapore.
+Potential Impact: Reflects the contribution of tourism to local food and beverage spending.
+Source: https://tablebuilder.singstat.gov.sg/table/TS/M550001
+data.gov dataset ID: d_7e7b2ee60c6ffc962f80fef129cf306e
+'''
 df2 = pd.read_csv("datasets\InternationalVisitorArrivalsByInboundTourismMarketsMonthly.csv")
-'''
-Independent Variable: Total International Visitor Arrivals By Inbound Tourism Markets
-Column Title: Total International Visitor Arrivals By Inbound Tourism Markets -> Rename to TotalInbound
-'''
+
 
 #Event Index
+'''
+Independent Variable: Event Index
+Column Title: EventIndex
+Description: Self generated file to capture the number of  public and school holidays at each month on a scale of 1 to 5
+Index Assignment:
+1: Very few holidays (0–2 holiday days).
+2: Few holidays (3–4 holiday days).
+3: Moderate holidays (5–7 holiday days).
+4: High holidays (8–10 holiday days).
+5: Very high holidays (11+ holiday days).
+Potential Impact: Could impact tourism in and out of Singapore
+Source: Self Made based on https://www.moe.gov.sg/news/press-releases/20230807-school-terms-and-holidays-for-2024
+'''
 df3 = pd.read_csv("datasets\event_index_data.csv")
 
 #Consumer Price Index
+'''
+Independent Variable: Inflation rate (calculated from the CPI).
+Column Title: All Items (Rename to CPIndex)
+Description: Will be used to calculate inflation rate.
+Potential Impact: High inflation could reduce consumer spending in the food and beverage sector.
+Source: https://tablebuilder.singstat.gov.sg/table/TS/M212881
+data.gov dataset ID: d_de7e93a1d0e22c790516a632747bf7f0
+'''
 df4 = pd.read_csv("datasets\ConsumerPriceIndexCPI2019AsBaseYearMonthly.csv")
 
-'''
-Independent Variable: Inflation Rate
-Column Title: All Items -> Rename to CPIndex
-'''
 
 #Tourist Expenditure
-df5 = pd.read_csv("datasets\TourismReceipts.csv")
 '''
-Independent Variable: Total Tourist Expenditure in Singapore Monthly
-Column Title:
+Independent Variable: Total tourist expenditure.
+Column Title: Various categories (Combine and rename columns to TotalExp)
+Potential Impact: Reflects the economic contribution of tourism to food and beverage services.
 Source: https://www.singstat.gov.sg/find-data/search-by-theme/industry/tourism/latest-data
 '''
+df5 = pd.read_csv("datasets\TourismReceipts.csv")
 
 #Food imports
+'''
+Independent Variable: Value of food imports.
+Column Titles: Various categories (Aggregate as TotalFoodImports)
+Description: Tracks Singapore’s reliance on imported food.
+Potential Impact: A heavy reliance on imports could influence food prices and the FBSIndex, especially during global supply disruptions.
+Source: https://tablebuilder.singstat.gov.sg/table/TS/M451021
+data.gov dataset ID: d_b89e35ce38cb93a17f5c016e71f50690
+'''
 df6 = pd.read_csv("datasets\MerchandiseImportsByCommodityDivisionMonthly.csv")
 
 ###Dependent Variables
 #Food Beverage Services Index
+'''
+Dependent Variable: Food and Beverage Services Index.
+Column Title: Total (Rename to FBSIndex)
+Description: Measures the monthly performance of Singapore’s food and beverage services sector.
+Potential Impact: Serves as the primary measure of how variables like tourism, imports, and inflation impact food service performance.
+Source: https://tablebuilder.singstat.gov.sg/table/TS/M601661
+data.gov dataset ID: d_d7933d23e5fab92a086585cfb9224ba2
+'''
 df8 = pd.read_csv("datasets\FoodBeverageServicesIndex2017100AtCurrentPricesMonthly.csv")
-'''
-Dependent Variable: Food and Beverage Services Index
-Column Title: Total -> Rename to FBSIndex
-'''
 
 #Food prices
+'''
+Dependent Variable: Food Prices
+Column Title: Economical Rice (1 Meat & 2 Vegetables) (Per Plate) - Rename to MealPrice
+"Premium Thai Rice (Per 5 Kilogram)" - Rename to "RicePrice"
+Description: Shows the prices of commodities such as the food staple Rice, and an average meal
+Potential Impact: Shows the direct costs of affording food
+Source: https://tablebuilder.singstat.gov.sg/table/TS/M212891
+data.gov dataset ID: d_d2467766bca7c1ed64ecd8fe07029df3
+'''
 df9 = pd.read_csv("datasets\AverageRetailPricesOfSelectedConsumerItemsMonthly.csv")
 
 

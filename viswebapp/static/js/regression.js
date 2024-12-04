@@ -18,7 +18,7 @@ async function populateOptions() {
 
 
 
-        // Add checkbox, label, and input field to the container
+        // Add checkbox, label to the container
         featuresDiv.appendChild(checkbox);
         featuresDiv.appendChild(label);
         featuresDiv.appendChild(document.createElement("br"));

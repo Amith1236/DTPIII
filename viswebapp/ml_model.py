@@ -126,14 +126,6 @@ def r2_score(y: np.ndarray, ypred: np.ndarray) -> float:
 def evaluate_model_metrics(y: np.ndarray, ypred: np.ndarray, n_features: int) -> dict:
     """
     Evaluates the performance of a regression model using multiple metrics.
-
-    Args:
-    y (np.ndarray): True target values.
-    ypred (np.ndarray): Predicted target values.
-    n_features (int): Number of independent variables (features).
-
-    Returns:
-    dict: Dictionary containing MSE, MAE, and Adjusted R².
     """
     print("y:")
     print(y)
