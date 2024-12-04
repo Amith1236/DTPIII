@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from ml_model import feature_columns, target_columns, scatterplot_data, run_regression
+from ml_model import feature_columns, target_columns, generate_scatterplot, run_regression
 
 app = Flask(__name__)
 
@@ -20,12 +20,13 @@ def get_columns():
 
 @app.route("/scatterplot", methods=["POST"])
 def scatterplot():
-    # Scatterplot data
     x_col = request.json["x_col"]
     y_col = request.json["y_col"]
-    scatter_data = scatterplot_data(x_col, y_col)  # Handles logic in ml_model.py
-    return jsonify(scatter_data)
 
+    # Generate scatter plot image
+    plot_url = generate_scatterplot(x_col, y_col)
+
+    return jsonify({"plot_url": plot_url})
 @app.route("/run_regression", methods=["POST"])
 def run_regression_route():
     # Run regression based on selected features and target

@@ -39,31 +39,13 @@ async function updatePlot() {
 
     const data = await response.json();
 
-    const ctx = document.getElementById("scatterPlot").getContext("2d");
+    // Update the image source dynamically
+    const plotImage = document.getElementById("scatterPlotImage");
+    plotImage.src = data.plot_url; // Assuming the backend returns a URL or base64 data for the image
 
-    // Destroy previous chart instance if it exists
-    if (chartInstance) {
-        chartInstance.destroy();
-    }
-
-    // Create a new chart
-    chartInstance = new Chart(ctx, {
-        type: "scatter",
-        data: {
-            datasets: [{
-                label: `${x_col} vs ${y_col}`,
-                data: data.x.map((x, i) => ({ x, y: data.y[i] })),
-                backgroundColor: 'rgba(75, 192, 192, 0.6)'
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: { title: { display: true, text: x_col } },
-                y: { title: { display: true, text: y_col } }
-            }
-        }
-    });
+    // Show the plot container once the image is ready
+    const scatterPlotContainer = document.getElementById("scatterPlotContainer");
+    scatterPlotContainer.style.display = "block"; // Show the image container
 }
 
 window.onload = populateDropdowns;

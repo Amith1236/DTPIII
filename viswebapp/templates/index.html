@@ -1,22 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatterplot Viewer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Scatterplot Viewer</h1>
-    <label for="x-select">X Variable:</label>
-    <select id="x-select"></select>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Scatterplot Viewer</h1>
 
-    <label for="y-select">Y Variable:</label>
-    <select id="y-select"></select>
+        <!-- Dropdowns for X and Y Variables -->
+        <div class="mb-4">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <label for="x-select" class="form-label">X Variable:</label>
+                    <select id="x-select" class="form-select">
+                        <!-- Options will be dynamically populated -->
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label for="y-select" class="form-label">Y Variable:</label>
+                    <select id="y-select" class="form-select">
+                        <!-- Options will be dynamically populated -->
+                    </select>
+                </div>
+            </div>
+        </div>
 
-    <button onclick="updatePlot()">Update Plot</button>
-    <canvas id="scatterPlot"></canvas>
+        <div class="text-center">
+            <button onclick="updatePlot()" class="btn btn-primary mb-3">Update Plot</button>
+        </div>
 
-    <!-- Add navigation button -->
-    <button onclick="location.href='/regression'">Go to Regression Page</button>
+        <!-- Image container for Scatterplot -->
+        <div id="scatterPlotContainer" class="text-center" style="display:none;">
+            <img id="scatterPlotImage" src="" alt="Scatter Plot with Regression Line" class="img-fluid" style="max-height: 500px; width: auto;">
+        </div>
+
+        <!-- Add navigation button -->
+        <div class="text-center mt-4">
+            <button onclick="location.href='/regression'" class="btn btn-secondary">Go to Regression Page</button>
+        </div>
+    </div>
 
     <script src="/static/js/scatter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

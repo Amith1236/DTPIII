@@ -32,7 +32,7 @@ let regressionChartInstance; // Store the chart instance globally
 async function runRegression() {
     const selectedFeatures = Array.from(document.querySelectorAll("input[name='feature']:checked"))
         .map(cb => cb.value);
-    const target = document.getElementById("target").value;
+    const target = [document.getElementById("target").value];
 
     const response = await fetch("/run_regression", {
         method: "POST",
@@ -52,34 +52,6 @@ async function runRegression() {
         <p><strong>Equation:</strong> ${equation}</p>
         <img src="data:image/png;base64,${cost_graph}" alt="Cost Graph">
     `;
-
-    // Destroy previous chart instance if it exists
-    if (regressionChartInstance) {
-        regressionChartInstance.destroy();
-    }
-
-    // Create a new chart (Cost Graph)
-    const ctx = document.getElementById("costGraph").getContext("2d");
-    regressionChartInstance = new Chart(ctx, {
-        type: "line",
-        data: {
-            labels: Array.from({ length: metrics.iterations }, (_, i) => i + 1), // Example x-axis
-            datasets: [{
-                label: "Cost Over Iterations",
-                data: metrics.cost_data, // You'll need to format the cost data correctly
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: { title: { display: true, text: 'Iterations' } },
-                y: { title: { display: true, text: 'Cost' } }
-            }
-        }
-    });
 }
 
 
